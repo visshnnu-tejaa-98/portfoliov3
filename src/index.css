@@ -1,0 +1,253 @@
+/* ── Nav ── */
+.vt-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: var(--bg-elevated);
+  border-bottom: 1px dashed var(--rule-strong);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: border-color var(--transition-snap);
+}
+.vt-nav.scrolled { border-bottom: 1px solid var(--rule-strong); }
+
+.vt-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--s-6);
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vt-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  text-decoration: none;
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ink-1);
+}
+.vt-logo-mark {
+  width: 34px; height: 34px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #FFFDF7;
+  flex-shrink: 0;
+}
+.vt-nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+}
+.vt-nav-link {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color var(--transition-snap);
+  padding: 4px 0;
+  position: relative;
+}
+.vt-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-snap);
+}
+.vt-nav-link:hover { color: var(--accent-deep); }
+.vt-nav-link:hover::after { transform: scaleX(1); }
+
+/* ── Page sections ── */
+.vt-section {
+  padding: var(--s-11) var(--s-6);
+  position: relative;
+  z-index: 1;
+}
+.vt-section-alt { background: var(--bg-elevated); }
+
+.vt-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.vt-container--narrow { max-width: 800px; margin: 0 auto; }
+
+/* ── Section heading ── */
+.vt-section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-2);
+}
+.vt-eyebrow-line {
+  height: 2px;
+  width: 32px;
+  background: var(--accent);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+/* ── Timeline ── */
+.vt-timeline { position: relative; }
+.vt-timeline::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  bottom: 16px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--rule-line));
+  border-radius: 999px;
+}
+.vt-timeline-item {
+  position: relative;
+  padding-left: var(--s-8);
+  margin-bottom: var(--s-7);
+}
+.vt-timeline-dot {
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.vt-timeline-dot--alt {
+  background: var(--lavender);
+  box-shadow: 0 0 0 2px var(--lavender);
+}
+
+/* ── Hero ── */
+.vt-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: var(--s-10);
+  position: relative;
+  overflow: hidden;
+}
+.vt-hero-inner {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--s-6);
+  position: relative;
+  z-index: 1;
+}
+.vt-hero-content { max-width: 640px; }
+
+/* ── Floating deco ── */
+.vt-float-a {
+  position: absolute;
+  pointer-events: none;
+  color: var(--accent);
+  animation: paperFloat 6s ease-in-out infinite;
+  --rot: -12deg;
+}
+.vt-float-b {
+  position: absolute;
+  pointer-events: none;
+  color: var(--matcha);
+  animation: paperFloat 7s 1s ease-in-out infinite;
+  --rot: 8deg;
+}
+.vt-float-c {
+  position: absolute;
+  pointer-events: none;
+  color: var(--lavender);
+  animation: paperFloat 8s 2s ease-in-out infinite;
+  --rot: 14deg;
+}
+.vt-float-d {
+  position: absolute;
+  pointer-events: none;
+  color: var(--sakura);
+  animation: paperFloat 5s 0.5s ease-in-out infinite;
+  --rot: -6deg;
+}
+
+/* ── Skills grid ── */
+.vt-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5);
+}
+@media (max-width: 900px) { .vt-skills-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .vt-skills-grid { grid-template-columns: 1fr; } }
+
+/* ── Personal projects grid ── */
+.vt-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5);
+}
+@media (max-width: 860px) { .vt-projects-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .vt-projects-grid { grid-template-columns: 1fr; } }
+
+/* ── Contact grid ── */
+.vt-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-5);
+}
+@media (max-width: 640px) { .vt-contact-grid { grid-template-columns: 1fr; } }
+
+/* ── About grid ── */
+.vt-about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--s-7);
+  align-items: start;
+}
+@media (max-width: 760px) { .vt-about-grid { grid-template-columns: 1fr; } }
+
+/* ── Experience / Education card header ── */
+.vt-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--s-2);
+  margin-bottom: var(--s-1);
+}
+/* on very small screens let badge drop below title */
+@media (max-width: 480px) {
+  .vt-card-meta { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── Mobile overrides ── */
+@media (max-width: 640px) {
+  .vt-section { padding: var(--s-9) var(--s-4); }
+  .vt-hero { padding-top: 90px; padding-bottom: var(--s-9); }
+  /* hide large floating elements that overlap hero text */
+  .vt-float-a { display: none; }
+  .vt-float-c { display: none; }
+  .vt-float-b { opacity: 0.25 !important; }
+  .vt-float-d { opacity: 0.35 !important; }
+  /* timeline: tighten left gutter */
+  .vt-timeline-item { padding-left: var(--s-7); }
+  /* contact CTA button: full width on mobile */
+  .vt-cta-btn { width: 100%; justify-content: center; }
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }

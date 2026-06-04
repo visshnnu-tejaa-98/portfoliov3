@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-palette="indigo" data-heading-font="caveat" data-texture="med" data-rotation="gentle">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="C V Visshnnu Tejaa — Senior Software Engineer portfolio" />
+  <title>C V Visshnnu Tejaa · Portfolio</title>
+  <script>
+    // FOUC guard — hydrate data attributes before paint
+    try {
+      var saved = localStorage.getItem('vt-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.dataset.theme = theme;
+    } catch(e) {}
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="/decorations.js"></script>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

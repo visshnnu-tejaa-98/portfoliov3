@@ -1,0 +1,816 @@
+/* ============================================================
+   ORIGAMI · Components
+   Paper-craft buttons, cards, inputs, badges, etc.
+   ============================================================ */
+
+/* ============================================================
+   BUTTONS — layered paper labels with tactile press
+   ============================================================ */
+.btn {
+  --btn-bg: var(--surface-card);
+  --btn-fg: var(--ink-1);
+  --btn-border: rgba(31,27,23,0.18);
+  --btn-shadow: 0 1px 0 rgba(31,27,23,0.06), 0 2px 4px rgba(31,27,23,0.10), 0 6px 14px -6px rgba(31,27,23,0.18);
+  --btn-shadow-press: inset 0 1px 0 rgba(255,255,255,0.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  padding: 0.65em 1.15em;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.005em;
+  border: 1px solid var(--btn-border);
+  border-radius: 12px 14px 12px 14px / 14px 12px 14px 12px;
+  box-shadow: var(--btn-shadow);
+  cursor: pointer;
+  transition: transform var(--transition-snap), box-shadow var(--transition-snap), background var(--transition-snap);
+  position: relative;
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;
+}
+[data-theme="dark"] .btn { --btn-border: rgba(242,235,220,0.16); }
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1px 0 rgba(31,27,23,0.06), 0 3px 6px rgba(31,27,23,0.12), 0 14px 22px -8px rgba(31,27,23,0.22);
+}
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: var(--btn-shadow-press), 0 1px 2px rgba(31,27,23,0.08);
+}
+
+.btn--primary {
+  --btn-bg: var(--ink-1);
+  --btn-fg: var(--paper-0);
+  --btn-border: var(--ink-1);
+}
+.btn--accent {
+  --btn-bg: var(--accent);
+  --btn-fg: #FFFDF7;
+  --btn-border: var(--accent-deep);
+}
+[data-theme="dark"] .btn--accent { --btn-fg: var(--paper-0); }
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-border: transparent;
+  box-shadow: none;
+}
+.btn--ghost:hover { background: var(--bg-elevated); box-shadow: none; transform: none; }
+.btn--outline {
+  --btn-bg: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--ink-1);
+  border-color: transparent;
+}
+.btn--sticky {
+  /* sticky-note button — has folded corner */
+  --btn-bg: var(--highlighter-soft);
+  --btn-border: rgba(31,27,23,0.10);
+  border-radius: 4px 14px 14px 4px / 4px 14px 14px 4px;
+  transform: rotate(var(--rot-2));
+}
+.btn--sticky:hover { transform: rotate(var(--rot-2)) translateY(-1px); }
+
+.btn--sm { padding: 0.45em 0.85em; font-size: 0.82rem; }
+.btn--lg { padding: 0.85em 1.5em; font-size: 1.02rem; border-radius: 14px 18px 14px 18px / 16px 14px 16px 14px; }
+.btn--xl { padding: 1em 1.8em; font-size: 1.12rem; border-radius: 16px 20px 16px 20px / 18px 16px 18px 16px; }
+
+.btn--icon { padding: 0.55em; aspect-ratio: 1; justify-content: center; }
+.btn--block { width: 100%; justify-content: center; }
+
+.btn[disabled], .btn[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* folded-corner decoration for primary CTA */
+.btn--folded {
+  position: relative;
+  overflow: visible;
+}
+.btn--folded::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper-1);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  filter: drop-shadow(-1px 1px 1px rgba(0,0,0,0.18));
+  transform: rotate(0deg);
+}
+
+/* ============================================================
+   CARDS — stacked paper sheets
+   ============================================================ */
+.card {
+  position: relative;
+  background: var(--surface-card);
+  border: 1px solid var(--rule-line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-paper-2);
+  padding: var(--s-6);
+}
+.card--paper {
+  border-radius: var(--r-paper);
+}
+.card--raised { box-shadow: var(--shadow-paper-3); }
+.card--flat   { box-shadow: var(--shadow-paper-1); }
+.card--floating { box-shadow: var(--shadow-paper-4); }
+
+/* note card — slightly rotated, with optional washi tape */
+.note {
+  position: relative;
+  background: var(--surface-card);
+  border: 1px solid var(--rule-line);
+  border-radius: 6px 12px 8px 14px / 12px 6px 14px 8px;
+  box-shadow: var(--shadow-paper-2);
+  padding: var(--s-5) var(--s-5) var(--s-6);
+  transform: rotate(var(--rot-1));
+  transition: transform var(--transition-paper), box-shadow var(--transition-paper);
+}
+.note:hover { transform: rotate(0deg) translateY(-3px); box-shadow: var(--shadow-paper-3); }
+
+.note--sticky {
+  background: var(--surface-sticky);
+  border-radius: var(--r-sticky);
+  box-shadow: var(--shadow-sticky);
+  font-family: var(--font-hand);
+  font-size: 1.18rem;
+  color: var(--ink-1);
+  padding: var(--s-5);
+}
+.note--sticky.note--pink   { background: var(--sakura-soft); }
+.note--sticky.note--green  { background: var(--matcha-soft); }
+.note--sticky.note--peach  { background: var(--peach-soft); }
+.note--sticky.note--lavender { background: var(--lavender-soft); }
+.note--sticky.note--indigo { background: var(--indigo-soft); }
+
+/* washi tape strip decoration — place absolutely on cards */
+.tape {
+  position: absolute;
+  width: 84px;
+  height: 22px;
+  background: var(--surface-tape);
+  border-radius: 1px;
+  transform: rotate(-4deg);
+  top: -10px;
+  left: 50%;
+  margin-left: -42px;
+  box-shadow: 0 1px 2px rgba(31,27,23,0.10);
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.18) 0 4px,
+      transparent 4px 8px
+    );
+}
+.tape--left  { left: 16px; margin-left: 0; transform: rotate(-8deg); }
+.tape--right { right: 16px; left: auto; margin-left: 0; transform: rotate(6deg); }
+.tape--pink     { background: rgba(237,157,174,0.78); }
+.tape--matcha   { background: rgba(162,193,129,0.72); }
+.tape--peach    { background: rgba(245,185,138,0.78); }
+.tape--lavender { background: rgba(183,167,215,0.72); }
+.tape--coral    { background: rgba(230,136,114,0.65); }
+.tape--indigo   { background: rgba(74,107,138,0.50); }
+[data-theme="dark"] .tape { box-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+
+/* paper-clip decoration */
+.clip {
+  position: absolute;
+  top: -14px;
+  left: 24px;
+  width: 28px;
+  height: 56px;
+  color: var(--ink-3);
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.18));
+}
+
+/* folded corner (turn one corner of a card) */
+.fold-corner {
+  position: relative;
+  overflow: hidden;
+}
+.fold-corner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--paper-3) 0%, var(--paper-2) 48%, transparent 50%);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  box-shadow: -2px 2px 4px rgba(31,27,23,0.10);
+}
+
+/* ============================================================
+   INPUTS — notebook-style underline + paper field
+   ============================================================ */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field-label {
+  font-family: var(--font-body);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--ink-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.field-label .req {
+  color: var(--coral-deep);
+  font-family: var(--font-hand);
+  font-size: 1.1em;
+}
+.field-help {
+  font-size: var(--t-xs);
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink-1);
+  background: var(--surface-card);
+  border: 1px solid var(--rule-line);
+  border-bottom: 2px solid var(--ink-5);
+  border-radius: 10px 12px 10px 12px / 12px 10px 12px 10px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color var(--transition-snap), box-shadow var(--transition-snap), background var(--transition-snap);
+}
+.input::placeholder, .textarea::placeholder {
+  color: var(--ink-4);
+  font-style: italic;
+}
+.input:hover, .textarea:hover, .select:hover {
+  border-bottom-color: var(--ink-3);
+}
+.input:focus, .textarea:focus, .select:focus {
+  border-bottom-color: var(--accent);
+  box-shadow: var(--glow-focus);
+}
+.textarea { min-height: 96px; resize: vertical; line-height: 1.55; }
+
+/* notebook-underline variant — only the bottom is visible */
+.input--underline {
+  border: 0;
+  border-bottom: 2px solid var(--ink-5);
+  border-radius: 0;
+  background: transparent;
+  padding: 10px 2px;
+}
+.input--underline:focus {
+  border-bottom-color: var(--accent);
+  box-shadow: none;
+  background:
+    linear-gradient(180deg, transparent 70%, var(--accent-soft) 70%);
+  background-size: 100% 92%;
+  background-repeat: no-repeat;
+}
+
+/* marker-highlight focus variant */
+.input--marker:focus {
+  background:
+    linear-gradient(180deg, transparent 50%, var(--highlighter-soft) 50%);
+}
+
+/* error */
+.field.has-error .input,
+.field.has-error .textarea {
+  border-bottom-color: var(--danger);
+  background: rgba(230, 136, 114, 0.06);
+}
+.field-error {
+  font-size: var(--t-xs);
+  color: var(--danger);
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ============================================================
+   CHECKBOX — hand-drawn check
+   ============================================================ */
+.check {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink-1);
+  line-height: 1.4;
+  user-select: none;
+}
+.check input { position: absolute; opacity: 0; pointer-events: none; }
+.check .box {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  border: 1.8px solid var(--ink-3);
+  border-radius: 5px 7px 6px 8px / 7px 5px 8px 6px;
+  background: var(--surface-card);
+  position: relative;
+  transition: all var(--transition-snap);
+  margin-top: 1px;
+}
+.check:hover .box { border-color: var(--ink-1); }
+.check input:focus-visible + .box { box-shadow: var(--glow-focus); }
+.check input:checked + .box {
+  background: var(--ink-1);
+  border-color: var(--ink-1);
+}
+.check input:checked + .box::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 9px;
+  height: 14px;
+  border: solid var(--paper-0);
+  border-width: 0 2.4px 2.4px 0;
+  transform: rotate(38deg);
+  border-radius: 1.4px;
+  /* slight hand-drawn wobble */
+}
+
+/* ============================================================
+   RADIO — ink stamp
+   ============================================================ */
+.radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink-1);
+  user-select: none;
+}
+.radio input { position: absolute; opacity: 0; pointer-events: none; }
+.radio .stamp {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  border: 1.8px solid var(--ink-3);
+  border-radius: 50%;
+  background: var(--surface-card);
+  position: relative;
+  transition: all var(--transition-snap);
+}
+.radio:hover .stamp { border-color: var(--ink-1); }
+.radio input:focus-visible + .stamp { box-shadow: var(--glow-focus); }
+.radio input:checked + .stamp { border-color: var(--accent-deep); }
+.radio input:checked + .stamp::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--accent-deep) inset;
+}
+
+/* ============================================================
+   TOGGLE
+   ============================================================ */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--ink-2);
+}
+.toggle input { display: none; }
+.toggle .track {
+  width: 38px;
+  height: 22px;
+  background: var(--ink-5);
+  border-radius: 999px;
+  position: relative;
+  transition: background var(--transition-snap);
+  flex: 0 0 38px;
+}
+.toggle .track::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: var(--surface-card);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+  transition: left var(--transition-snap), background var(--transition-snap);
+}
+.toggle input:checked + .track { background: var(--accent); }
+.toggle input:checked + .track::after { left: 18px; }
+
+/* ============================================================
+   BADGES — washi tape style
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+.badge--matcha { background: var(--matcha-soft); color: var(--matcha-deep); }
+.badge--sakura { background: var(--sakura-soft); color: var(--sakura-deep); }
+.badge--peach  { background: var(--peach-soft); color: var(--peach-deep); }
+.badge--lavender { background: var(--lavender-soft); color: var(--lavender-deep); }
+.badge--indigo { background: var(--indigo-soft); color: var(--indigo-deep); }
+.badge--ink    { background: var(--ink-1); color: var(--paper-0); }
+.badge--ghost  { background: transparent; color: var(--ink-3); border: 1px dashed var(--rule-strong); }
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-4);
+}
+.dot--success { background: var(--matcha-deep); }
+.dot--warning { background: var(--peach-deep); }
+.dot--danger  { background: var(--coral-deep); }
+.dot--info    { background: var(--indigo-deep); }
+
+/* ============================================================
+   CHIP / TAG
+   ============================================================ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--bg-elevated);
+  color: var(--ink-2);
+  border: 1px solid var(--rule-line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background var(--transition-snap), border-color var(--transition-snap);
+}
+.chip:hover { border-color: var(--rule-strong); background: var(--bg-sunken); }
+.chip[aria-pressed="true"], .chip.active {
+  background: var(--ink-1);
+  color: var(--paper-0);
+  border-color: var(--ink-1);
+}
+
+/* ============================================================
+   TOOLTIP — sticky note
+   ============================================================ */
+.tooltip {
+  position: absolute;
+  background: var(--surface-sticky);
+  color: var(--ink-1);
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  padding: 6px 12px;
+  border-radius: 3px 10px 10px 3px / 3px 10px 10px 3px;
+  box-shadow: var(--shadow-sticky);
+  transform: rotate(-2deg);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   PROGRESS — brush stroke
+   ============================================================ */
+.progress {
+  position: relative;
+  height: 6px;
+  background: var(--bg-sunken);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress .bar {
+  position: absolute;
+  inset: 0;
+  width: var(--p, 50%);
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+  border-radius: 999px;
+  /* brush-edge end */
+  -webkit-mask-image: radial-gradient(ellipse at 100% 50%, black 96%, transparent 100%);
+          mask-image: radial-gradient(ellipse at 100% 50%, black 96%, transparent 100%);
+}
+.progress--ink .bar { background: var(--ink-1); }
+
+/* circular progress (use inline svg or this wrapper) */
+.ring {
+  --p: 65;
+  --size: 64px;
+  --stroke: 6px;
+  width: var(--size);
+  height: var(--size);
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  color: var(--ink-1);
+  background:
+    conic-gradient(var(--accent) calc(var(--p) * 1%), var(--ink-5) 0);
+  border-radius: 50%;
+  position: relative;
+}
+.ring::before {
+  content: "";
+  position: absolute;
+  inset: var(--stroke);
+  background: var(--surface-card);
+  border-radius: 50%;
+}
+.ring > span { position: relative; }
+
+/* ============================================================
+   MODAL — floating paper sheet
+   ============================================================ */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 27, 23, 0.32);
+  backdrop-filter: blur(2px);
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+[data-theme="dark"] .modal-backdrop { background: rgba(0,0,0,0.62); }
+.modal {
+  background: var(--surface-card);
+  border-radius: var(--r-paper);
+  box-shadow: var(--shadow-paper-4);
+  padding: var(--s-7);
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  transform: rotate(-0.4deg);
+}
+
+/* ============================================================
+   DIVIDERS — dashed ruled line, perforated, brush
+   ============================================================ */
+.rule {
+  border: 0;
+  border-top: 1px solid var(--rule-line);
+  height: 0;
+  margin: var(--s-5) 0;
+}
+.rule--dashed { border-top: 1px dashed var(--rule-strong); }
+.rule--dotted { border-top: 2px dotted var(--rule-strong); }
+.rule--perforated {
+  border: 0;
+  height: 4px;
+  background-image: radial-gradient(circle at 4px 2px, var(--rule-strong) 1.2px, transparent 1.4px);
+  background-size: 12px 4px;
+}
+.rule--brush {
+  border: 0;
+  height: 8px;
+  background: var(--ink-1);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+          mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+  opacity: 0.32;
+}
+
+/* ============================================================
+   AVATAR
+   ============================================================ */
+.avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: 1.5px solid var(--surface-card);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+}
+.avatar--sm { width: 28px; height: 28px; font-size: 0.95rem; }
+.avatar--lg { width: 52px; height: 52px; font-size: 1.4rem; }
+
+/* ============================================================
+   ICON BOX (a small paper square with an icon)
+   ============================================================ */
+.iconbox {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  border-radius: 9px 11px 9px 11px / 11px 9px 11px 9px;
+  box-shadow: 0 1px 0 rgba(31,27,23,0.06), 0 2px 6px rgba(31,27,23,0.10);
+}
+.iconbox--lg { width: 52px; height: 52px; border-radius: 11px 14px 11px 14px / 14px 11px 14px 11px; }
+
+/* ============================================================
+   STAR RATING (hand-drawn)
+   ============================================================ */
+.stars { display: inline-flex; gap: 4px; }
+.stars svg { width: 22px; height: 22px; color: var(--ink-5); cursor: pointer; transition: color var(--transition-snap), transform var(--transition-snap); }
+.stars svg.active, .stars svg:hover, .stars svg:hover ~ svg.active { color: var(--highlighter-deep); }
+.stars[data-static="true"] svg { cursor: default; }
+
+/* ============================================================
+   SEGMENTED CONTROL (paper tab)
+   ============================================================ */
+.seg {
+  display: inline-flex;
+  padding: 4px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--rule-line);
+  border-radius: 14px;
+  gap: 2px;
+}
+.seg button {
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all var(--transition-snap);
+}
+.seg button:hover { color: var(--ink-1); }
+.seg button.active {
+  background: var(--surface-card);
+  color: var(--ink-1);
+  box-shadow: 0 1px 0 rgba(31,27,23,0.06), 0 2px 6px rgba(31,27,23,0.10);
+}
+
+/* ============================================================
+   TAB BAR (notebook tabs)
+   ============================================================ */
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--rule-strong);
+  padding: 0 12px;
+}
+.tabs button {
+  padding: 10px 16px 12px;
+  background: var(--bg-elevated);
+  color: var(--ink-3);
+  border: 1px solid var(--rule-line);
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  position: relative;
+  bottom: -1px;
+  transition: all var(--transition-snap);
+}
+.tabs button:hover { color: var(--ink-1); }
+.tabs button.active {
+  background: var(--surface-card);
+  color: var(--ink-1);
+  border-color: var(--rule-strong);
+  border-bottom: 1px solid var(--surface-card);
+}
+
+/* ============================================================
+   KBD
+   ============================================================ */
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 2px 6px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--rule-strong);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  color: var(--ink-2);
+}
+
+/* ============================================================
+   SHEET / SIDEBAR — notebook spine
+   ============================================================ */
+.sidebar {
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--rule-line);
+  padding: var(--s-5);
+  position: relative;
+}
+.sidebar::before {
+  /* notebook spiral binding */
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  width: 12px;
+  background-image: radial-gradient(circle at 6px 14px, var(--ink-5) 2.2px, transparent 2.6px);
+  background-size: 12px 24px;
+  background-repeat: repeat-y;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  font-family: var(--font-body);
+  font-size: 0.93rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition-snap), color var(--transition-snap);
+}
+.nav-item:hover { background: var(--bg-sunken); color: var(--ink-1); }
+.nav-item.active {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+.nav-item .nav-icon { width: 18px; height: 18px; }
+
+/* ============================================================
+   STAGE / PAGE WRAPPER
+   ============================================================ */
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--s-7) var(--s-6);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes paperFloat {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50% { transform: translateY(-6px) rotate(calc(var(--rot, 0deg) + 0.6deg)); }
+}
+.float-paper { animation: paperFloat 5.5s ease-in-out infinite; }
+
+@keyframes paperUnfold {
+  0% { transform: perspective(800px) rotateX(-65deg) scaleY(0.6); transform-origin: top; opacity: 0; }
+  100% { transform: perspective(800px) rotateX(0) scaleY(1); transform-origin: top; opacity: 1; }
+}
+.unfold { animation: paperUnfold 520ms cubic-bezier(.32,.72,.18,1.1) both; }
+
+@keyframes inkDraw {
+  0% { stroke-dashoffset: 100%; }
+  100% { stroke-dashoffset: 0; }
+}
+.ink-draw path { stroke-dasharray: 100%; animation: inkDraw 1.6s ease-out forwards; }
+
+@keyframes stickyPeel {
+  0% { transform: rotate(var(--rot-2)) translateY(-12px) scale(0.96); opacity: 0; }
+  100% { transform: rotate(var(--rot-2)) translateY(0) scale(1); opacity: 1; }
+}
+.peel-in { animation: stickyPeel 400ms cubic-bezier(.2,.7,.2,1) both; }
+
+@keyframes confettiFall {
+  0%   { transform: translateY(-40vh) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translateY(120vh) rotate(540deg); opacity: 0.6; }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

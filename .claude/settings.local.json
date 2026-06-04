@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:snapcss.in)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebSearch",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(curl -s http://localhost:5173/src/main.jsx)",
+      "Bash(grep *)",
+      "Bash(node -e ' *)",
+      "Bash(cp /home/visshnnutejaa/Downloads/tokens.css \"/home/visshnnutejaa/VT/personal projects/snapcss-test/src/tokens.css\")",
+      "Bash(cp /home/visshnnutejaa/Downloads/components.css \"/home/visshnnutejaa/VT/personal projects/snapcss-test/src/components.css\")",
+      "Bash(cp /home/visshnnutejaa/Downloads/decorations.js \"/home/visshnnutejaa/VT/personal projects/snapcss-test/src/decorations.js\")",
+      "Bash(cp /home/visshnnutejaa/Downloads/app.js \"/home/visshnnutejaa/VT/personal projects/snapcss-test/src/ds-app.js\")"
+    ]
+  }
+}
