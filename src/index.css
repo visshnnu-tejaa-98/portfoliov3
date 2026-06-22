@@ -255,6 +255,40 @@
   }
 }
 
+/* ── Projects (featured + compact) ── */
+.vt-projects-featured {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-6);
+}
+.vt-projects-featured > article:nth-child(3) {
+  grid-column: 1 / -1;
+}
+@media (max-width: 760px) {
+  .vt-projects-featured {
+    grid-template-columns: 1fr;
+  }
+  .vt-projects-featured > article:nth-child(3) {
+    grid-column: auto;
+  }
+}
+
+.vt-projects-compact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5);
+}
+@media (max-width: 860px) {
+  .vt-projects-compact {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 540px) {
+  .vt-projects-compact {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── Contact grid ── */
 .vt-contact-grid {
   display: grid;

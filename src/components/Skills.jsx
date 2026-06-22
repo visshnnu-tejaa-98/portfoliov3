@@ -128,67 +128,6 @@ export default function Skills() {
             </div>
           ))}
         </div>
-
-        {/* Personal projects */}
-        <div
-          className="card card--paper"
-          style={{ background: "var(--bg-elevated)" }}
-        >
-          <div className="tape tape--matcha" />
-          <div className="t-eyebrow" style={{ marginBottom: "var(--s-5)" }}>
-            Personal Projects
-          </div>
-          <div className="vt-projects-grid">
-            {projects.map((p) => (
-              <div key={p.name} className="vt-projects-grid-item">
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--s-2)",
-                    marginBottom: "var(--s-2)",
-                  }}
-                >
-                  <Deco name="icon-layers" size={16} />
-
-                  <h4>{p.name}</h4>
-                </div>
-                <p style={{ fontSize: "var(--t-sm)", margin: 0 }}>{p.desc}</p>
-                {/* Links Section */}
-                <div
-                  style={{
-                    marginTop: "var(--s-3)",
-                    display: "flex",
-                    gap: "var(--s-3)",
-                  }}
-                >
-                  {p.github && (
-                    <a
-                      href={p.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="chip"
-                      style={{ textDecoration: "none" }}
-                    >
-                      <FaGithub size={16} />
-                    </a>
-                  )}
-                  {p.app && (
-                    <a
-                      href={p.app}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="chip"
-                      style={{ textDecoration: "none" }}
-                    >
-                      <Deco name="icon-link" size={16} />
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
