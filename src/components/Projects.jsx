@@ -3,6 +3,21 @@ import { FaGithub } from "react-icons/fa";
 
 const featured = [
   {
+    name: "Origami Forms",
+    tagline: "Full-Stack Form Builder & Analytics Platform",
+    desc: "A form-builder SaaS I designed and built solo in TypeScript. It offers a form builder with 14 field types, per-field validation, multi-page forms, and a draft-to-publish workflow with expiry dates and response limits. A real-time layer streams submissions and form views to the dashboard the moment they happen, with every connection authenticated individually. The backend is a type-safe monorepo where the database schema, API contract, and UI types all derive from a single source — and the public REST documentation generates automatically from the same code.",
+    stack: ["TypeScript", "Next.js", "tRPC", "Express JS", "PostgreSQL", "Drizzle ORM", "Socket.IO", "Zustand", "Turborepo"],
+    github: "https://github.com/visshnnu-tejaa-98/origami-forms",
+    app: "https://origami-forms.up.railway.app/",
+    tape: "tape--lavender",
+    badge: "badge--lavender",
+    avatarBg: "var(--lavender-soft)",
+    avatarFg: "var(--lavender-deep)",
+    borderColor: "var(--lavender)",
+    rot: "-0.4deg",
+    deco: "icon-layers",
+  },
+  {
     name: "SnapCSS",
     tagline: "utility-first CSS framework",
     desc: "Built and published a utility-first CSS framework inspired by Tailwind CSS, featuring reusable utility classes, responsive design utilities, customizable configurations, and npm distribution. Designed to accelerate UI development and improve developer productivity.",

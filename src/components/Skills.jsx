@@ -8,6 +8,7 @@ const groups = [
     icon: "icon-layers",
     skills: [
       "React JS",
+      "Next JS",
       "TypeScript",
       "JavaScript (ES6+)",
       "Redux",
@@ -34,7 +35,7 @@ const groups = [
   {
     label: "Backend",
     icon: "icon-zap",
-    skills: ["Node JS", "Express JS", "REST APIs"],
+    skills: ["Node JS", "Express JS", "REST APIs", "Next JS"],
     badge: "badge--matcha",
   },
   {
@@ -44,15 +45,15 @@ const groups = [
     badge: "badge--peach",
   },
   {
-    label: "Tools",
+    label: "Libraries and Tools",
     icon: "icon-settings",
-    skills: ["Git", "GitHub", "Bitbucket", "Vite", "VS Code", "vite"],
+    skills: ["Git", "GitHub", "Bitbucket", "Vite", "VS Code", "vite", "trpc", "Railway", "Claude", "Cursor" ],
     badge: "badge--indigo",
   },
   {
     label: "Stack",
     icon: "icon-sparkles",
-    skills: ["MERN Stack", "SPA", "Responsive Design", "Performance"],
+    skills: ["MERN Stack", "SPA", "Responsive Design", "Performance", "Deployment"],
     badge: "badge--sakura",
   },
 ];
